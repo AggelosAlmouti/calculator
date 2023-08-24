@@ -2,7 +2,7 @@
 
 body {
     font-family: Roboto Mono, sans-serif;
-    /* background-color: #1a1a1a; */
+    background-color: #E6CEA0;
     color: white;
     display: flex;
     justify-content: center;
@@ -15,39 +15,80 @@ body::-webkit-scrollbar {
 }
 
 .calculator {
-    height: 400px;
+    height: 450px;
     width: 280px;
     border: 15px solid #1a1a1a;
     border-radius: 15px;
     background-color: #1a1a1a;
     box-shadow: 5px 5px 20px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.screen {
-    height: 80px;
-    width: 100%;
+.display {
+    height: 15%;
+    width: 260px;
     background-color: gray;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
+    padding: 10px;
+    box-shadow: 2px 2px 7px black inset;
+    font-size: large;
+}
+
+.display .result {
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    color: #186116;
 }
 
 .buttons {
+    height: 80%;
+    width: 280px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
     margin-top: 20px;
 }
 
-button {
-    height: 50px;
-    width: 50px;
+.buttons .operator {
+    background-color: orange;
 }
 
-.equals {
-    width: 110px;
+.buttons .function {
+    background-color: gray;
+}
+
+button {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: larger;
+    background-color: #1a1a1a;
+    border: none;
+    box-shadow: 5px 5px 5px black;
+    color: white;
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: translateY(-5px);
+    filter: brightness(150%);
+}
+
+.buttons .operator:hover,
+.buttons .function:hover {
+    filter: brightness(110%);
+}
+
+.buttons .equals {
+    width: 130px;
+    border-radius: 30px;
 }
