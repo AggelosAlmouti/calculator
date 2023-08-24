@@ -6,36 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
     <script src="https://kit.fontawesome.com/e59fac9149.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="calculator">
         <div class="display">
-            <div class="input">455+34969</div>
+            <div class="input"></div>
             <div class="result">3399502034</div>
         </div>
         <div class="buttons">
-            <button class="function">C</button>
-            <button class="function"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></button>
-            <button class="operator">%</button>
-            <button class="operator">/</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="operator">x</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button class="operator">-</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button class="operator">+</button>
-            <button>0</button>
-            <button>.</button>
-            <button class="operator equals">=</button>
+            <button class="function" id="clear">C</button>
+            <button class="function" id="delete"><i class="fa-solid fa-delete-left"
+                    style="color: #ffffff;"></i></button>
+            <button class="operator" id="remainder">%</button>
+            <button class="operator" id="divide">/</button>
+            <button id="seven">7</button>
+            <button id="eight">8</button>
+            <button id="nine">9</button>
+            <button class="operator" id="multiply">x</button>
+            <button id="four">4</button>
+            <button id="five">5</button>
+            <button id="six">6</button>
+            <button class="operator" id="subtract">-</button>
+            <button id="one">1</button>
+            <button id="two">2</button>
+            <button id="three">3</button>
+            <button class="operator" id="add">+</button>
+            <button id="zero">0</button>
+            <button id="decimal">.</button>
+            <button class="operator equals" id="equals">=</button>
         </div>
     </div>
 </body>

@@ -2,16 +2,13 @@
 
 body {
     font-family: Roboto Mono, sans-serif;
-    background-color: #E6CEA0;
+    background-color: #a491c4;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-
-body::-webkit-scrollbar {
-    display: none;
+    overflow: hidden;
 }
 
 .calculator {

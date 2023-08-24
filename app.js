@@ -19,5 +19,43 @@ function operate(a, b, operator) {
     }
 };
 
-
+const input = document.querySelector('.display .input');
+const buttons = document.querySelectorAll('button');
 let a, b, operator;
+
+buttons.forEach(button => {
+    button.addEventListener('click', e => {
+        switch (button.id) {
+            case 'clear':
+                input.innerHTML = '';
+                break;
+            case 'delete':
+                break;
+            case 'equals':
+                if (operator) operate(a, b, operator);
+                break;
+            case 'remainder':
+                input.innerHTML += button.innerHTML;
+                operator = '%';
+                break;
+            case 'divide':
+                input.innerHTML += button.innerHTML;
+                operator = '/';
+                break;
+            case 'multiply':
+                input.innerHTML += button.innerHTML;
+                operator = '*';
+                break;
+            case 'subtract':
+                input.innerHTML += button.innerHTML;
+                operator = '-';
+                break;
+            case 'add':
+                input.innerHTML += button.innerHTML;
+                operator = '+';
+                break;
+            default:
+                input.innerHTML += button.innerHTML;
+        }
+    })
+});
