@@ -12,7 +12,7 @@ function operate(a, b, operator) {
             return add(a, b);
         case '-':
             return substract(a, b);
-        case '*':
+        case 'x':
             return multiply(a, b);
         case '/':
             return divide(a, b);
@@ -20,42 +20,41 @@ function operate(a, b, operator) {
 };
 
 const input = document.querySelector('.display .input');
+const result = document.querySelector('.display .result');
 const buttons = document.querySelectorAll('button');
-let a, b, operator;
+let display = a = b = operator = '';
+let end = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', e => {
-        switch (button.id) {
-            case 'clear':
-                input.innerHTML = '';
-                break;
-            case 'delete':
-                break;
-            case 'equals':
-                if (operator) operate(a, b, operator);
-                break;
-            case 'remainder':
-                input.innerHTML += button.innerHTML;
-                operator = '%';
-                break;
-            case 'divide':
-                input.innerHTML += button.innerHTML;
-                operator = '/';
-                break;
-            case 'multiply':
-                input.innerHTML += button.innerHTML;
-                operator = '*';
-                break;
-            case 'subtract':
-                input.innerHTML += button.innerHTML;
-                operator = '-';
-                break;
-            case 'add':
-                input.innerHTML += button.innerHTML;
-                operator = '+';
-                break;
-            default:
-                input.innerHTML += button.innerHTML;
+        if (!end) {
+            if (button.classList == 'number') {
+                if (operator) {
+                    b += button.innerHTML;
+                    display += button.innerHTML;
+                } else {
+                    a += button.innerHTML;
+                    display += button.innerHTML;
+                }
+                input.innerHTML = display;
+            }
+
+            if (button.classList == 'operator' && b === '') {
+                if (operator) {
+                    //todo
+                } else {
+                    display += button.innerHTML;
+                }
+                operator = button.innerHTML;
+                input.innerHTML = display;
+            }
+
+            if (button.id == 'equals' && a != '' && b != '') {
+                a = parseInt(a);
+                b = parseInt(b);
+                result.innerHTML = operate(a, b, operator);
+                end = true;
+            }
         }
     })
 });

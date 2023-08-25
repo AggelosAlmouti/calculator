@@ -26,7 +26,6 @@ body {
 .display {
     height: 15%;
     width: 260px;
-    background-color: gray;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
