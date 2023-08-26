@@ -2,7 +2,8 @@
 
 body {
     font-family: Roboto Mono, sans-serif;
-    background-color: #a491c4;
+    background-image: url("images/wooden-background.jpg");
+    background-size: 100vh;
     color: white;
     display: flex;
     justify-content: center;
