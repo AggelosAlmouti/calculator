@@ -23,6 +23,7 @@ function operate(a, b, operator) {
     }
 };
 
+
 const input = document.querySelector('.display .input');
 const result = document.querySelector('.display .result');
 const buttons = document.querySelectorAll('button');
@@ -36,6 +37,11 @@ buttons.forEach(button => {
             input.innerHTML = '';
             result.innerHTML = '';
         }
+
+        if (button.id == 'backspace' && a != '') {
+            //todo
+        }
+
         if (button.classList == 'number') {
             if (operator) {
                 b += button.innerHTML;
@@ -46,7 +52,8 @@ buttons.forEach(button => {
             }
             input.innerHTML = display;
         }
-        if (button.classList == 'operator' && b === '') {
+
+        if (button.classList == 'operator' && b == '') {
             if (operator) {
                 //todo
             } else {
@@ -57,8 +64,9 @@ buttons.forEach(button => {
         }
 
         if (button.id == 'percentage' && a != '') {
-            operator = button.innerHTML;
-            result.innerHTML = operate(a, b, operator);
+            a = operate(a * 1, b * 1, operator);
+            result.innerHTML = input.innerHTML = display = a;
+            console.log(a);
         }
 
         if (button.id == 'equals' && a != '' && b != '') {
@@ -71,9 +79,5 @@ buttons.forEach(button => {
 });
 
 //------------------todos-----------------------
-//can't have operator as first input
 //keyboard support
-//decimal button
-//backspace button
-//round results so that they don't overlfow display
 //error message during 2 consecutive operators
