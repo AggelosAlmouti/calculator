@@ -6,6 +6,8 @@ function multiply(a, b) { return a * b };
 
 function divide(a, b) { return a == 0 || b == 0 ? false : a / b };
 
+function percentage(a) { return a / 100 }
+
 function operate(a, b, operator) {
     switch (operator) {
         case '+':
@@ -16,6 +18,8 @@ function operate(a, b, operator) {
             return multiply(a, b);
         case '/':
             return divide(a, b);
+        case '%':
+            return percentage(a);
     }
 };
 
@@ -23,38 +27,53 @@ const input = document.querySelector('.display .input');
 const result = document.querySelector('.display .result');
 const buttons = document.querySelectorAll('button');
 let display = a = b = operator = '';
-let end = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', e => {
-        if (!end) {
-            if (button.classList == 'number') {
-                if (operator) {
-                    b += button.innerHTML;
-                    display += button.innerHTML;
-                } else {
-                    a += button.innerHTML;
-                    display += button.innerHTML;
-                }
-                input.innerHTML = display;
-            }
-
-            if (button.classList == 'operator' && b === '') {
-                if (operator) {
-                    //todo
-                } else {
-                    display += button.innerHTML;
-                }
-                operator = button.innerHTML;
-                input.innerHTML = display;
-            }
-
-            if (button.id == 'equals' && a != '' && b != '') {
-                a = parseInt(a);
-                b = parseInt(b);
-                result.innerHTML = operate(a, b, operator);
-                end = true;
-            }
+        //on clear reset variables and display
+        if (button.id == 'clear') {
+            a = b = operator = display = '';
+            input.innerHTML = '';
+            result.innerHTML = '';
         }
+        if (button.classList == 'number') {
+            if (operator) {
+                b += button.innerHTML;
+                display += button.innerHTML;
+            } else {
+                a += button.innerHTML;
+                display += button.innerHTML;
+            }
+            input.innerHTML = display;
+        }
+        if (button.classList == 'operator' && b === '') {
+            if (operator) {
+                //todo
+            } else {
+                display += button.innerHTML;
+            }
+            operator = button.innerHTML;
+            input.innerHTML = display;
+        }
+
+        if (button.id == 'percentage' && a != '') {
+            operator = button.innerHTML;
+            result.innerHTML = operate(a, b, operator);
+        }
+
+        if (button.id == 'equals' && a != '' && b != '') {
+            a = operate(a * 1, b * 1, operator);
+            result.innerHTML = input.innerHTML = display = a;
+            b = operator = '';
+        }
+
     })
 });
+
+//------------------todos-----------------------
+//can't have operator as first input
+//keyboard support
+//decimal button
+//backspace button
+//round results so that they don't overlfow display
+//error message during 2 consecutive operators
