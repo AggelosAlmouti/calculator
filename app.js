@@ -70,6 +70,8 @@ buttons.forEach(button => {
             input.innerHTML = display;
         }
 
+        //the operator is in between 'a' and 'b' so 'a' should already be populated before the keystrok
+        //while 'b' should not to avoid having and operator as first input or two operators at the same time
         if (button.classList == 'operator' && a != '' && b == '') {
             if (operator && operator != '%') {
                 display = display.slice(0, -1);
@@ -82,15 +84,19 @@ buttons.forEach(button => {
             input.innerHTML = display;
         }
 
+        //same logic for percentage operator, check to not be the first input
+        //and to not have a second number or operator
         if (button.id == 'percentage' && a != '' && b == '') {
             a = operate(a * 1, b * 1, operator);
             result.innerHTML = input.innerHTML = display = a;
             console.log(a);
         }
 
+        //if variable is populated remove last char
+        //the check is in reverse order to the order the user is typing
         if (button.id == 'backspace' && a != '') {
             if (b) {
-                a = a.slice(0, -1);
+                b = b.slice(0, -1);
             } else if (operator) {
                 operator = '';
             } else if (a) {
@@ -100,12 +106,14 @@ buttons.forEach(button => {
             input.innerHTML = display;
         }
 
+        //check to see if all values are populated
+        //multiplay by 1 to turn strings to numbers
         if (button.id == 'equals' && a != '' && b != '') {
             a = operate(a * 1, b * 1, operator);
+            a = a.toString();
             result.innerHTML = input.innerHTML = display = a;
             b = operator = '';
         }
     })
 });
 //keyboard support
-//backspace bugs
