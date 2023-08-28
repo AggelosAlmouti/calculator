@@ -116,4 +116,85 @@ buttons.forEach(button => {
         }
     })
 });
+
+
 //keyboard support
+const numbers = Array.from(document.querySelectorAll('.number'));
+const operators = Array.from(document.querySelectorAll('.operator'));
+const numKey = numbers.map(number => { return number.innerHTML; });
+const opKey = operators.map(operator => { return operator.innerHTML });
+document.addEventListener('keydown', keystroke => {
+    //clear
+    if (keystroke.key == 'Escape') {
+        console.log(input.innerHTML)
+        a = b = operator = display = '';
+        floatingPointA = floatingPointB = false;
+        input.innerHTML = '';
+        result.innerHTML = '';
+    }
+
+    //numbers
+    if (numKey.includes(keystroke.key)) {
+        // if (operator) {
+        //     if (button.id == 'floating-point') {
+        //         if (!floatingPointB) {
+        //             b += button.innerHTML;
+        //             display += button.innerHTML;
+        //             floatingPointB = true;
+        //         }
+        //     } else {
+        //         b += button.innerHTML;
+        //         display += button.innerHTML;
+        //     }
+        // } else {
+        //     if (button.id == 'floating-point') {
+        //         if (!floatingPointA) {
+        //             a += button.innerHTML;
+        //             display += button.innerHTML;
+        //             floatingPointA = true;
+        //         }
+        //     } else {
+        //         a += button.innerHTML;
+        //         display += button.innerHTML;
+        //     }
+        // }
+        // input.innerHTML = display;
+    }
+
+    //operators
+    if (opKey.includes(keystroke.key)) {
+        // if (operator && operator != '%') {
+        //     display = display.slice(0, -1);
+        //     operator = button.innerHTML;
+        //     display += button.innerHTML;
+        // } else {
+        //     operator = button.innerHTML;
+        //     display += button.innerHTML;
+        // }
+        // input.innerHTML = display;
+    };
+
+    //backspace
+    if (keystroke.key == 'Backspace' && a != '') {
+        if (b) {
+            b = b.slice(0, -1);
+        } else if (operator) {
+            operator = '';
+        } else if (a) {
+            a = a.slice(0, -1);
+        }
+        display = display.slice(0, -1);
+        input.innerHTML = display;
+    }
+
+    //equals
+    if (keystroke.key == 'Enter' && a != '' && b != '') {
+        a = operate(a * 1, b * 1, operator);
+        a = a.toString();
+        result.innerHTML = input.innerHTML = display = a;
+        b = operator = '';
+    }
+});
+
+//bugs
+//keyboard *, % don't work cause shift pressed
