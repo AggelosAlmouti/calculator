@@ -4,7 +4,7 @@ function substract(a, b) { return a - b };
 
 function multiply(a, b) { return a * b };
 
-function divide(a, b) { return a == 0 || b == 0 ? false : a / b };
+function divide(a, b) { return b == 0 ? 'input error' : a / b };
 
 function percentage(a) { return a / 100 }
 
@@ -110,7 +110,11 @@ buttons.forEach(button => {
         if (button.id == 'equals' && a != '' && b != '') {
             a = operate(a * 1, b * 1, operator);
             a = a.toString();
-            result.innerHTML = input.innerHTML = display = a;
+            if (a == NaN) {
+                result.innerHTML = 'input error';
+            } else {
+                result.innerHTML = input.innerHTML = display = a;
+            }
             b = operator = '';
         }
     })
@@ -123,7 +127,6 @@ const operators = Array.from(document.querySelectorAll('.operator'));
 const numKey = numbers.map(number => { return number.innerHTML; });
 const opKey = operators.map(operator => { return operator.innerHTML });
 document.addEventListener('keydown', keystroke => {
-    console.log(keystroke)
     //clear
     if (keystroke.key == 'Escape') {
         a = b = operator = display = '';
@@ -162,7 +165,6 @@ document.addEventListener('keydown', keystroke => {
 
     //operators
     if (opKey.includes(keystroke.key)) {
-        console.log(keystroke)
         if (operator && operator != '%') {
             display = display.slice(0, -1);
             operator = keystroke.key;
@@ -197,9 +199,11 @@ document.addEventListener('keydown', keystroke => {
     if (keystroke.key == 'Enter' && a != '' && b != '') {
         a = operate(a * 1, b * 1, operator);
         a = a.toString();
-        result.innerHTML = input.innerHTML = display = a;
+        if (a == NaN) {
+            result.innerHTML = 'input error';
+        } else {
+            result.innerHTML = input.innerHTML = display = a;
+        }
         b = operator = '';
     }
 });
-
-// catch NaNs
