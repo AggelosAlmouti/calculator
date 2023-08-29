@@ -89,7 +89,6 @@ buttons.forEach(button => {
         if (button.id == 'percentage' && a != '' && b == '') {
             a = operate(a * 1, b * 1, operator);
             result.innerHTML = input.innerHTML = display = a;
-            console.log(a);
         }
 
         //if variable is populated remove last char
@@ -124,9 +123,9 @@ const operators = Array.from(document.querySelectorAll('.operator'));
 const numKey = numbers.map(number => { return number.innerHTML; });
 const opKey = operators.map(operator => { return operator.innerHTML });
 document.addEventListener('keydown', keystroke => {
+    console.log(keystroke)
     //clear
     if (keystroke.key == 'Escape') {
-        console.log(input.innerHTML)
         a = b = operator = display = '';
         floatingPointA = floatingPointB = false;
         input.innerHTML = '';
@@ -135,43 +134,44 @@ document.addEventListener('keydown', keystroke => {
 
     //numbers
     if (numKey.includes(keystroke.key)) {
-        // if (operator) {
-        //     if (button.id == 'floating-point') {
-        //         if (!floatingPointB) {
-        //             b += button.innerHTML;
-        //             display += button.innerHTML;
-        //             floatingPointB = true;
-        //         }
-        //     } else {
-        //         b += button.innerHTML;
-        //         display += button.innerHTML;
-        //     }
-        // } else {
-        //     if (button.id == 'floating-point') {
-        //         if (!floatingPointA) {
-        //             a += button.innerHTML;
-        //             display += button.innerHTML;
-        //             floatingPointA = true;
-        //         }
-        //     } else {
-        //         a += button.innerHTML;
-        //         display += button.innerHTML;
-        //     }
-        // }
-        // input.innerHTML = display;
+        if (operator) {
+            if (keystroke.key == '.') {
+                if (!floatingPointB) {
+                    b += keystroke.key;
+                    display += keystroke.key;
+                    floatingPointB = true;
+                }
+            } else {
+                b += keystroke.key;
+                display += keystroke.key;
+            }
+        } else {
+            if (keystroke.key == '.') {
+                if (!floatingPointA) {
+                    a += keystroke.key;
+                    display += keystroke.key;
+                    floatingPointA = true;
+                }
+            } else {
+                a += keystroke.key;
+                display += keystroke.key;
+            }
+        }
+        input.innerHTML = display;
     }
 
     //operators
     if (opKey.includes(keystroke.key)) {
-        // if (operator && operator != '%') {
-        //     display = display.slice(0, -1);
-        //     operator = button.innerHTML;
-        //     display += button.innerHTML;
-        // } else {
-        //     operator = button.innerHTML;
-        //     display += button.innerHTML;
-        // }
-        // input.innerHTML = display;
+        console.log(keystroke)
+        if (operator && operator != '%') {
+            display = display.slice(0, -1);
+            operator = keystroke.key;
+            display += keystroke.key;
+        } else {
+            operator = keystroke.key;
+            display += keystroke.key;
+        }
+        input.innerHTML = display;
     };
 
     //backspace
@@ -187,6 +187,12 @@ document.addEventListener('keydown', keystroke => {
         input.innerHTML = display;
     }
 
+    //percentage
+    if (keystroke.key == '%' && a != '' && b == '') {
+        a = operate(a * 1, b * 1, operator);
+        result.innerHTML = input.innerHTML = display = a;
+    }
+
     //equals
     if (keystroke.key == 'Enter' && a != '' && b != '') {
         a = operate(a * 1, b * 1, operator);
@@ -196,5 +202,4 @@ document.addEventListener('keydown', keystroke => {
     }
 });
 
-//bugs
-//keyboard *, % don't work cause shift pressed
+// catch NaNs
